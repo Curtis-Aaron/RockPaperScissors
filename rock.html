@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <title>Rock, Paper, or Scissors</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--        <link rel="stylesheet" media="screen and (min-width: 600px)" href="../css/main.css">
+        <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">-->
+    </head>
+    <body>
+        <header>
+        </header>
+        <main>
+<!--            <form>
+                <fieldset>
+                    <input type="button" value="Rock">
+                    <br>
+                    <input type="button" value="Paper">
+                    <br>
+                    <input type="button" value="Scissors">
+                </fieldset>
+            </form>-->
+<p id="demo"> </p>
+<p id="demo2"> </p>
+<p id="demo3"> </p>
+<p id="demo4"> </p>
+<p id="demo5"> </p>
+<p id="demo6"> </p>
+<p id="demo7"> </p>
+        
+        <div>
+            <script>
+                var play = prompt("Want to play?");
+                    if (play === "yes"){
+                        var rPS = new Array(0, 0, 0);
+                        myFunction();
+                        
+                    }
+                    
+                
+    
+                function myFunction(){
+                //My array
+                
+                    var cookie = document.cookie;
+                    //document.write(rPS);
+                    //rPS = cookie;
+                    cookie = rPS;
+                    //document.write(cookie);
+                    //document.getElementById("demo4").innerHTML = cookie;
+                    document.getElementById("demo5").innerHTML = rPS;
+                    //document.write(rPS [0]);
+                    //document.write(rPS [1]);
+                    //document.write(rPS [2]);
+                
+                    // User choice
+                    var userChoice = prompt("Do you choose rock, paper or scissors?");
+                    if (! userChoice) {
+                        // User choice was undefined
+                        var cheat = "<p>Player 1, you cheated! Refresh this screen and fight like a man.</p>";
+                        document.getElementById("demo").innerHTML = cheat;
+                    } else {
+                        // Display user choice
+                        var userPlay = "<p>Player 1:" + " " + userChoice + "</p>";
+                        document.getElementById("demo").innerHTML = userPlay;
+                        
+                    }
+                    
+               
+                
+                // Computer choice
+// Ideas:
+// 1) If there is no previous hand have computer play paper
+// 2) If the other player wins play the opposite on the next hand.
+// 3) If you win never play the same option twice in a row.
+// https://www.psychologytoday.com/us/blog/the-blame-game/201504/the-surprising-psychology-rock-paper-scissors
+// https://statmodeling.stat.columbia.edu/2007/05/21/how_to_win_at_r/
+
+                    var computerChoice; 
+                    if (rPS [0] === 0) {
+                        computerChoice = "paper";
+                    } else if (rPS [2] === 1) {
+                        if (rPS [0] === "paper"){
+                                computerChoice = "scissors";
+                        } else if (rPS[0] === "scissors") {
+                                computerChoice = "rock";
+                        } else (computerChoice = "paper")
+                    } else if (rPS [2] === 2){
+                            if (rPS [1] === "paper"){
+                                computerChoice = Math.random();
+                                if (computerChoice < 0.50){
+                                    computerChoice = "rock";
+                                } else {
+                                    computerChoice = "scissors";
+                                }
+                            } else if (rPS [1] === "rock"){
+                                computerChoice = Math.random();
+                                if (computerChoice < 0.50){
+                                    computerChoice = "paper";
+                                } else {
+                                    computerChoice = "scissors";
+                                }
+                            } else {
+                                computerChoice = Math.random();
+                                if (computerChoice < 0.50){
+                                    computerChoice = "rock";
+                                } else {
+                                    computerChoice = "paper";
+                                }
+                                }   
+                    } else {
+                        if (rPS [2] === 0){
+                            if (rPS[1] === "paper") {
+                                computerChoice = Math.random();
+                                if (computerChoice < 0.50){
+                                    computerChoice = "rock";
+                                } else if ( computerChoice <= 0.75){
+                                    computerChoice = "paper";
+                                } else {
+                                    computerChoice = "scissors";
+                                }
+                            } else if (rPS[1] === "rock") {
+                                computerChoice = Math.random();
+                                if (computerChoice < 0.50){
+                                    computerChoice = "scissors";
+                                } else if ( computerChoice <= 0.75){
+                                    computerChoice = "paper";
+                                } else {
+                                    computerChoice = "rock";
+                                }
+                            } else {
+                                computerChoice = Math.random();
+                                if (computerChoice < 0.50){
+                                    computerChoice = "paper";
+                                } else if ( computerChoice <= 0.75){
+                                    computerChoice = "rock";
+                                } else {
+                                    computerChoice = "scissors";
+                                }
+                            }
+                        }
+                    }
+                         
+                     
+
+                     //document.getElementById("demo").innerHTML = rPS;
+
+                     // Display computer choice
+                     var compPlay = "<p>Computer:" + " " + computerChoice + "</p>";
+                     document.getElementById("demo2").innerHTML = compPlay;
+
+
+
+                     // Compare user choice vs computer choice
+                     var compare = function(choice1,choice2) {
+                         if (choice1 === choice2) {
+                             return "It's a tie!";
+                         }
+                         if (choice1 === "rock") {
+                             if (choice2 === "scissors") {
+                                 // rock wins
+                                 return "You win!";
+                             } else {
+                                 // paper wins
+                                 return "You lose! Try again.";
+                             }
+                         }
+                         if (choice1 === "paper") {
+                             if (choice2 === "rock") {
+                                 // paper wins
+                                 return "You win!";
+                             } else {
+                                 // scissors wins
+                                 return "You lose! Try again.";
+                             }
+                         }
+                         if (choice1 === "scissors") {
+                             if (choice2 === "rock") {
+                                 // rock wins
+                                 return "You lose! Try again.";
+                             } else {
+                                 // scissors wins
+                                 return "You win!";
+                             }
+                         }
+                     };
+                     // Run the compare function
+                     var results = compare(userChoice,computerChoice);
+
+                     //logging info to array at top
+                     rPS[0] = userChoice;
+                     rPS[1] = computerChoice;
+                     //from comps point of view
+                     if (results === "It's a tie!") {
+                         rPS[2] = 0;
+                     } else if (results === "You win!") {
+                         //loss
+                         rPS[2] = 1;
+                     } else {
+                         //win
+                         rPS[2] = 2;
+                     }
+                     //document.cookie = rPS [0];
+                     //document.cookie = rPS [1];
+                     //document.cookie = rPS [2];
+                     //allCookies = document.cookie;
+                     //document.write(allCookies);
+                     document.cookie = rPS;
+                     // Display results
+                     var final = "<br><hr><br>" + results;
+                     document.getElementById("demo3").innerHTML = final;
+                     
+                    //letsTryThis();
+                    
+                }
+                
+                function letsTryThis (){
+                    play = prompt("Want to play?");
+                    if (play === "yes"){
+                        document.getElementById("demo").innerHTML = "";
+                        document.getElementById("demo2").innerHTML = "";
+                        document.getElementById("demo3").innerHTML = "";
+                        myFunction();
+                    }
+                }
+            
+            
+                
+                
+            </script>
+        </div>
+            
+        </main>
+    </body>
+</html>
+
